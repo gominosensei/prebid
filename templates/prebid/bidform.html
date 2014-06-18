@@ -1,0 +1,24 @@
+{% extends "prebid/base.html" %}
+
+{% block content %}
+<h1>{{ item.title }}</h1>
+
+
+<p>{{ item.description }}</p>
+
+{% load humanize %}
+{% if current_bid %}Current high bid: ${{ current_bid | floatformat:2 | intcomma }}
+{% else %}Starting bid: ${{ item.minimumBid | floatformat:2 | intcomma }}
+{% endif %}
+
+<h2>Place a bid</h2>
+
+<form action="{% url 'item' item.id %}" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+
+
+
+
+{% endblock %}

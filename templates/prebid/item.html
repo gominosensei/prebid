@@ -1,0 +1,38 @@
+{% extends "prebid/base.html" %}
+
+{% block content %}
+<h1>{{ item.title }}</h1>
+
+
+<p>{{ item.description }}</p>
+
+{% load humanize %}
+{% if current_bid %}Current high bid: ${{ current_bid | floatformat:2 | intcomma }}
+{% else %}Starting bid: ${{ item.minimumBid | floatformat:2 | intcomma }}
+{% endif %}
+
+<h2>Place a bid</h2>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form role="form" action="{% url 'bid' item.id %}" method="post">
+	{% csrf_token %}
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+  </div>
+  <div class="form-group">
+    <label for="amount">Bid</label>
+    <input type="number" class="form-control" name="amount" id="amount" >
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="phone">Telephone number</label>
+    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+  </div>
+	<button type="submit" class="btn btn-default">Bid</button>
+</form>
+
+
+{% endblock %}
