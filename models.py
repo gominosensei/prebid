@@ -18,6 +18,7 @@ class Item(models.Model):
 		return self.title
 
 class USPhoneNumberField(forms.CharField):
+	# Copied from django.contrib.localflavor
 	"""
 	A form field that validates input as a U.S. phone number.
 	"""
@@ -36,6 +37,7 @@ class USPhoneNumberField(forms.CharField):
 		raise ValidationError(self.error_messages['invalid'])
 
 class PhoneNumberField(models.CharField):
+	# Copied from django.contrib.localflavor
 	from south.modelsinspector import add_introspection_rules
 	"""
 	A :class:`~django.db.models.CharField` that checks that the value
@@ -66,6 +68,4 @@ class Bid(models.Model):
 	
 	def clean(self):
 		if not self.phone and not self.email:
-			raise ValidationError('A bid requires either a phone number or an email address')
-		
-	
+			raise ValidationError('We need to know either your phone number or email address so we can contact you if you win.')
