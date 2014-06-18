@@ -10,7 +10,7 @@ phone_digits_re = re.compile(r'^(?:1-?)?(\d{3})[-\.]?(\d{3})[-\.]?(\d{4})$')
 
 class Item(models.Model):
 	title = models.CharField(max_length = 255, blank=False)	
-	#photo url
+	photo = models.ImageField(upload_to='auction_items', null=True)
 	description = models.TextField(blank=True, default='')	
 	minimumBid = models.DecimalField(max_digits=5, decimal_places=2, null=True)
 	

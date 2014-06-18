@@ -9,11 +9,11 @@
     <meta name="author" content="michael donnelly">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Silent Auction</title>
+    <title>Bartell Theater Awards - Silent Auction</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://robothijinks.com/~donnelly/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-		<link href="http://robothijinks.com/~donnelly/bower_components/bootstrap/less/jumbotron.less" rel="stylesheet">
+	<link href="http://robothijinks.com/~donnelly/bower_components/bootstrap/less/jumbotron.less" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'listings/starter-template.css' %}" rel="stylesheet">
@@ -22,8 +22,23 @@
 
   <body>
 
-
-			{% block content %}{% endblock %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+		{% block jumbotron %}
+			<h1>Bartell Theatre Awards Silent Auction</h1>
+			<p>On July 12, 2014, the <a href='http://www.bartelltheatre.org/bartell-theatre-awards'>5th Annual Bartell Theatre Awards</a> will include a silent auction. Pre-bid here, and go to the Bartell Community Theatre to make sure you win.</p>
+		{% endblock %}
+      </div>
+    </div>
+    
+    <div class="container">
+		{% block content %}{% endblock %}
+	</div>
+	
+	<footer>
+		<p>Pablo, honey</p>
+	</footer>
 
 			
 			

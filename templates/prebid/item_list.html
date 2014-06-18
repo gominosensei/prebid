@@ -1,10 +1,22 @@
 {% extends "prebid/base.html" %}
 
 {% block content %}
-    <h2>Items</h2>
-    <ul>
-        {% for item in object_list %}
-            <li><a href="{% url 'item' item.id %}">{{ item.title }}</a></li>
-        {% endfor %}
-    </ul>
+<div class="row">
+	{% for item in object_list %}
+		<div class="col-md-4" >
+			<h2><a href="{% url 'item' item.id %}">{{ item.title }}</a></h2>
+			{% if item.photo %}
+				<a href="{% url 'item' item.id %}">
+					<img src="{{ item.photo.url }}" width=100%/>
+				</a>
+			{% endif %}
+			<p>{{ item.description }}</p>
+ 	        <p><a class="btn btn-primary" href="{% url 'item' item.id %}" role="button">Bid &raquo;</a></p>
+ 		</div>
+		{% if forloop.counter|divisibleby:"3" %}
+			</div><div class="row">
+	    {% endif %}
+	{% endfor %}
+    </div>
+</div>
 {% endblock %}

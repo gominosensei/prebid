@@ -1,24 +1,40 @@
 {% extends "prebid/base.html" %}
 
+
+
 {% block content %}
-<h1>{{ item.title }}</h1>
+<div class="row">
+	<div class="col-md-6" >
 
 
-<p>{{ item.description }}</p>
+		<h2>{{ item.title }}</h2>
 
-{% load humanize %}
-{% if current_bid %}Current high bid: ${{ current_bid | floatformat:2 | intcomma }}
-{% else %}Starting bid: ${{ item.minimumBid | floatformat:2 | intcomma }}
-{% endif %}
+		<p>{{ item.description }}</p>
 
-<h2>Place a bid</h2>
+		{% if item.photo %}
+			<a href="{% url 'item' item.id %}">
+				<img src="{{ item.photo.url }}" width=100%/>
+			</a>
+		{% endif %}
 
-<form action="{% url 'item' item.id %}" method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+	</div>
+	<div class="col-md-6">
 
+		<h3>Place your bid</h3>
+		<div class="alert alert-info">
+			{% load humanize %}
+			{% if current_bid %}Current winning bid: <strong>${{ current_bid | floatformat:2 | intcomma }}</strong>
+			{% else %}Starting bid: <strong>${{ item.minimumBid | floatformat:2 | intcomma }}</strong>
+			{% endif %}
+		</div>
 
+		<form action="{% url 'item' item.id %}" method="post">{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" class="btn btn-success" value="Bid Now" />
+		</form>
+
+	</div>
+</div>
 
 
 {% endblock %}
